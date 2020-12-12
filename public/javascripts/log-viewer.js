@@ -1,16 +1,12 @@
 
 
-const connection= new WebSocket('"ws://localhost:3000"')
+    const connection = new WebSocket("ws://localhost:3000")
+const logWindow = document.querySelector("#log-window")
 
-const logwindow= document.querySelector('#log-window')
+connection.onopen = () => {
+  connection.send("Hello from the client!")
+}
 
-
-
-    connection.onopen =()=>{
-        connection.send('hello form WebSocket Client')
-
-    }
-
-    connection.onmessage =(event)=>{
-        logwindow.innerHTML= event.data
-    }
+connection.onmessage = (event) => {
+  logWindow.innerHTML = event.data
+}
