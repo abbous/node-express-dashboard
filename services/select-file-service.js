@@ -5,7 +5,7 @@ const path =require('path')
 const dir =process.cwd()
 function getDirectoryContents(files, currentDir, query) {
     const data=[]
-    files.foreach(file=>{
+    files.foreach((file)=>{
         if(isDirectory(currentDir,file)){
             data.push({
                 name:file,
@@ -36,6 +36,7 @@ function readDir(currentDir, res, query) {
 }
 
 exports.get = (req, res) => {
+    var currentDir=dir
     const query = req.query.path || ""
     if(query){
         currentDir= path.join(currentDir,file)
