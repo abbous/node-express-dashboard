@@ -8,6 +8,8 @@ const app = require("../app");
 const debug = require("debug")("log-dashboard:server");
 const http = require("http");
 const WebSocket = require('ws');
+const fs =require('fs');
+const { file } = require("jscodeshift");
 
 const wss= new WebSocket.Server({ port: 8080 })
 
@@ -30,8 +32,15 @@ const server = http.createServer(app);
 
 server.listen(port);
 wss.on('connection',function callback(ws){
-  ws.on('message',function cb(message){
-    ws.send('hello from sockets',message);
+  ws.on('filePath',function cb(message){
+    fs.watch(filePath,()=>{
+      fs.createReadStream(filePath).on('data',chunk =>{
+        var logsArr= chunk.toString().split("\n")
+        var logsStr=logsArr.reverse().join("\n")
+        ws.send(logsStr)
+       });
+    })
+    
 
   })
 })
