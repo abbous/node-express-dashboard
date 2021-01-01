@@ -32,7 +32,7 @@ const server = http.createServer(app);
 
 server.listen(port);
 wss.on('connection',function callback(ws){
-  ws.on('filePath',function cb(message){
+  ws.on('message',(filePath)=>{
     fs.watch(filePath,()=>{
       fs.createReadStream(filePath).on('data',chunk =>{
         var logsArr= chunk.toString().split("\n")
