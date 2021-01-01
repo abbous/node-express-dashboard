@@ -36,9 +36,9 @@ function readDir(currentDir, res, query) {
 }
 
 exports.get = (req, res) => {
-    var currentDir=dir
-    const query = req.query.path || ""
-    if(query){
-        currentDir= path.join(currentDir,file)
+    let currentDir = dir;
+    const query = req.query.path || "";
+    if (query) {
+      currentDir = path.join(currentDir, query)
     }
 };
