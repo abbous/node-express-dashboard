@@ -19,8 +19,9 @@ function getDirectoryContents(files, currentDir, query) {
             isDirectory: false,
             path : path.join(query, file),
             currentDir
-      
-    });
+        })
+    }
+    })
     return data;
 }
 
@@ -44,8 +45,7 @@ function readDir(currentDir, res, query) {
 exports.get = (req, res) => {
     let currentDir = dir;
     const query = req.query.path || "";
-    if (query) {
-      currentDir = path.join(currentDir, query)
-    }
+    if (query) {currentDir = path.join(currentDir, query)}
+    
     readDir(currentDir,res,query);
-};
+}
