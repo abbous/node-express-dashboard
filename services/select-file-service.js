@@ -9,11 +9,17 @@ function getDirectoryContents(files, currentDir, query) {
       if (isDirectory(currentDir, file)) {
         data.push({
           name : file,
-          isDirectory: false,
+          isDirectory: true,
           path : path.join(query, file),
-          currentDir
+          
         });
-      }
+      }else{
+        data.push({
+            name : file,
+            isDirectory: false,
+            path : path.join(query, file),
+            currentDir
+      
     });
     return data;
 }
@@ -41,4 +47,5 @@ exports.get = (req, res) => {
     if (query) {
       currentDir = path.join(currentDir, query)
     }
+    readDir(currentDir,res,query);
 };
