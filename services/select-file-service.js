@@ -2,8 +2,11 @@
 const fs =require('fs');
 const path =require('path')
 
-const dir =process.cwd()
-function getDirectoryContents(files, currentDir, query) {
+exports.setcwd =(cwd)=>{
+  dir =cwd
+}
+
+ function getDirectoryContents(files, currentDir, query) {
     const data = [];
     files.forEach((file) => {
       if (isDirectory(currentDir, file)) {
