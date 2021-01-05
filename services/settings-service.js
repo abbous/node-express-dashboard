@@ -20,11 +20,11 @@ function writeSettings(newSettings) {
 }
 
 function getDefaultDir() {
-  const defaultdir = getSettings().defaultDir
-  if(!defaultdir) return process.cwd()
-  return isValidDir? defaultdir: process.cwd()
+  const defaultDir = getSettings().defaultDir
+  if(!defaultDir) return process.cwd()
+  return isValidDir? defaultDir: process.cwd()
 }
-
+ 
 function isValidDir(dirPath) {
   try {
     fs.readdirSync(dirPath)
