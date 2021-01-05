@@ -4,6 +4,7 @@ const fileService = require("../services/select-file-service")
 const { getSettings, writeSettings, isValidDir } = require("../services/settings-service.js");
 const { validationResult } = require("express-validator");
 const { body } = require("express-validator");
+const  {getDefaultDir} = require('../services/settings-service.js')
 
 /* GET home page. */
 router.get("/", (req, res, next) => {
@@ -12,7 +13,10 @@ router.get("/", (req, res, next) => {
 
 /* GET select file. */
 router.get("/select-file", (req, res, next) => {
+  fileService.setcwd(getDefaultDir())
   res.render("select-file", { title: "Select Log File" });
+
+  
 });
 
 /* GET settings. */
