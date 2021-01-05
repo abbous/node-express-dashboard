@@ -9,6 +9,7 @@ const debug = require("debug")("log-dashboard:server");
 const http = require("http");
 const WebSocket = require('ws');
 const fs =require('fs');
+const {getSettings} = require('../services/settings-service')
 const { file } = require("jscodeshift");
 
 const wss= new WebSocket.Server({ port: 8080 })
@@ -36,6 +37,10 @@ wss.on('connection',function callback(ws){
     fs.watch(filePath,()=>{
       fs.createReadStream(filePath).on('data',chunk =>{
         var logsArr= chunk.toString().split("\n")
+        const settings=getSettings()
+        if(settings.filter){
+          logsArr= logsArr.filter(line=> !line.includes(settings.filter))
+        }
         var logsStr=logsArr.reverse().join("\n")
         ws.send(logsStr)
        });
