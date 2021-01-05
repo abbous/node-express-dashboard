@@ -8,7 +8,7 @@ function getSettings() {
 }
 
 function writeSettings(newSettings) {
-  const settingsJSON= JSON.stringify(newSettings,null,2)
+  const settingsJSON = JSON.stringify(newSettings,null,2)
   try {
     fs.writeFileSync(settingsFilePath, settingsJSON)
   return true    
